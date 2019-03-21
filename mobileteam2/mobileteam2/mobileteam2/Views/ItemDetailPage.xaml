@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="mobileteam2.Views.ItemDetailPage"
+             Title="{Binding Title}">
+    <StackLayout Spacing="5" Padding="15">
+        <Label Text="Claim Number" FontAttributes="Bold" FontSize="Medium" />
+        <Label Text="{Binding Item.Number}" FontSize="Small" Margin="0,0,0,5"/>
+        <Label Text="Description" FontAttributes="Bold" FontSize="Medium" />
+
+        <StackLayout Orientation="Horizontal">
+            <Entry 
+                IsVisible="{Binding isEditingDescription}" 
+                Text="{Binding Item.Description}" 
+                Placeholder="{Binding Item.Description}"/>
+            <Image
+                Source="edit.png"
+                HeightRequest="30"
+                WidthRequest="30">
+            </Image>
+        </StackLayout>
+
+        <BoxView 
+            Margin="0,15,0,0" 
+            HeightRequest="3"
+            BackgroundColor="#2e7d32" />
+
+        <ListView
+            x:Name="TimelineListView"
+            ItemsSource="{Binding Timeline.TimelineList}"
+            RowHeight="60"
+            SeparatorVisibility="None" 
+            ItemTapped="TimelineListView_OnItemTapped">
+            <ListView.Header>
+                <StackLayout Padding="0,20,0,0">
+                    <Label Text="Claim Tracker" FontSize="Medium" FontAttributes="Bold" />
+                </StackLayout>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <StackLayout 
+                                Orientation="Horizontal"
+                                Padding="0,4,0,0">
+                                <Image
+                                    Source="{Binding Check}"
+                                    HeightRequest="30"
+                                    WidthRequest="30">
+                                </Image>
+                                <Label
+                                    Margin="5,0"
+                                    Text="{Binding Text}"
+                                    FontSize="Medium"/>
+                            </StackLayout>
+                            <BoxView
+                                IsVisible="{Binding IsNotLastStep}"
+                                Margin="13,0,0,5"
+                                BackgroundColor="#2e7d32"
+                                HorizontalOptions="Start"
+                                VerticalOptions="Fill"    
+                                WidthRequest="3" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

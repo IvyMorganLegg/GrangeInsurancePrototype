@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="mobileteam2.Views.PhotosPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:mobileteam2.ViewModels;assembly=mobileteam2"
+    x:Name="contentPhotoPage"
+    Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <viewModels:PhotoViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label
+                HorizontalOptions="CenterAndExpand"
+                Text="Add 4-6 photos of completed work."
+                VerticalOptions="CenterAndExpand" />
+            <StackLayout>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ListView
+                        x:Name="ItemsListView"
+                        CachingStrategy="RecycleElement"
+                        HasUnevenRows="true"
+                        IsPullToRefreshEnabled="false"
+                        ItemTapped="ItemsListView_OnItemTapped"
+                        ItemsSource="{Binding ImagesTaken}"
+                        VerticalOptions="FillAndExpand">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <FlexLayout
+                                        Padding="5"
+                                        JustifyContent="SpaceAround"
+                                        Wrap="Wrap">
+                                        <Image
+                                            HeightRequest="150"
+                                            Source="{Binding ImagePath}"
+                                            WidthRequest="150" />
+                                    </FlexLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <Button
+                        x:Name="btnAddPhoto"
+                        Grid.Row="1"
+                        Margin="0,10,0,0"
+                        BackgroundColor="#2E7D32"
+                        Clicked="TakePhotoClicked"
+                        Text="+ add photo"
+                        TextColor="White" />
+                </Grid>
+
+
+
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
